@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compétences | Wayne TSHINGI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        /* --- ANIMATION SCROLL REVEAL CINÉMATIQUE --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            filter: blur(8px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1),
+                        transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1),
+                        filter 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* --- MICRO-INTERACTIONS ET ENTRÉES FLUIDES --- */
+        .interactive-element {
+            opacity: 0;
+            transform: translateY(15px);
+            filter: blur(4px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .interactive-element.visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .category-card, .interactive-badge {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -10px rgba(79, 70, 229, 0.12);
+            border-color: rgba(79, 70, 229, 0.25);
+        }
+
+        .interactive-badge:hover {
+            transform: translateY(-2px);
+            border-color: rgba(79, 70, 229, 0.4);
+            background-color: #f5f3ff;
+            color: #4f46e5 !important;
+        }
+
+        nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Personnalisation de la barre de défilement */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="gradient-bg overflow-x-hidden text-gray-800">
+
+    <nav class="fixed w-full z-50 bg-white/70 shadow-sm border-b border-gray-100 transition-all duration-300 py-4" id="main-nav">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-12">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold tracking-tight text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                        WAYNE TSHINGI
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-300">Accueil</a>
+                    <a href="aboutme.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-300">Qui suis-je ?</a>
+                    <a href="project_page.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-300">Projets</a>
+                    <a href="skills.html" class="text-indigo-600 font-semibold border-b-2 border-indigo-500 pb-1">Compétences</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-300">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button focus:outline-none text-gray-700 hover:text-indigo-600 transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu hidden md:hidden bg-white/95 backdrop-blur-md shadow-lg pt-24 pb-6 fixed w-full z-40 border-b border-gray-100">
+        <div class="px-6 space-y-3">
+            <a href="index.html" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Accueil</a>
+            <a href="aboutme.html" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">À propos</a>
+            <a href="project_page.html" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Projets</a>
+            <a href="skills.html" class="block px-4 py-2 rounded-lg text-base font-medium bg-indigo-50 text-indigo-600">Compétences</a>
+            <a href="contact.html" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Contact</a>
+        </div>
+    </div>
+
+    <section class="pt-36 pb-20 px-6 min-h-[calc(100vh-80px)]">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="text-center mb-16 reveal" id="skills-header">
+                <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-4">Mes Compétences</h1>
+                <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                    Un aperçu des compétences techniques, aptitudes humaines et outils logiciels développés au fil de mes projets d'ingénierie et de mon parcours universitaire.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 reveal">
+                    <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2.5">
+                        <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        Compétences Techniques
+                    </h2>
+                    <div id="skills-container" class="space-y-5">
+                        <p class="text-gray-400 text-sm animate-pulse">Chargement des compétences techniques...</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 reveal">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2.5">
+                            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Qualités Humaines
+                        </h2>
+                        <div id="softskills-container" class="flex flex-wrap gap-2.5">
+                            <p class="text-gray-400 text-sm animate-pulse">Chargement des soft skills...</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 reveal">
+                        <h2 class="text-xl font-bold text-gray-900 mb-5 flex items-center gap-2.5">
+                            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 11.37 7.31 16.5 3 19"></path></svg>
+                            Langues
+                        </h2>
+                        <div class="flex flex-wrap gap-3">
+                            <div class="bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 flex flex-col min-w-[125px] interactive-badge">
+                                <span class="text-sm font-bold text-gray-800">Français</span>
+                                <span class="text-xs text-indigo-600 font-medium mt-0.5">Langue maternelle</span>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 flex flex-col min-w-[125px] interactive-badge">
+                                <span class="text-sm font-bold text-gray-800">Anglais</span>
+                                <span class="text-xs text-indigo-600 font-medium mt-0.5">Technique / Interm.</span>
+                            </div>
+                            <div class="bg-gray-50 px-4 py-3 rounded-xl border border-gray-100 flex flex-col min-w-[125px] interactive-badge">
+                                <span class="text-sm font-bold text-gray-800">Lingala</span>
+                                <span class="text-xs text-indigo-600 font-medium mt-0.5">Courant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 mb-12 reveal">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6 border-b border-gray-100 pb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900 flex items-center gap-2.5">
+                            <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Écosystème Logiciel & Outils 
+                        </h2>
+                        <p class="text-xs text-gray-500 mt-1">Environnements de développement, modélisation assistée et outils d'ingénierie maîtrisés.</p>
+                    </div>
+                </div>
+                
+                <div id="categories-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <p class="text-gray-400 text-sm animate-pulse col-span-full">Chargement et catégorisation des logiciels...</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 reveal">
+                <h2 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2.5">
+                    <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Activités & Intérêts
+                </h2>
+                <div id="hobbies-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <p class="text-gray-400 text-sm animate-pulse col-span-full text-center">Chargement des intérêts...</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-gray-950 text-white py-12 px-6 border-t border-gray-900">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="text-lg font-bold tracking-tight">WAYNE TSHINGI</p>
+                <p class="text-sm text-gray-400">Étudiant en Génie Mécanique</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="https://www.instagram.com/_the_shadow96/" class="text-gray-400 hover:text-white transition-colors duration-200" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.linkedin.com/in/wayne-tshingi-a0157a280" class="text-gray-400 hover:text-white transition-colors duration-200" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/Waynekaila" class="text-gray-400 hover:text-white transition-colors duration-200" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+            <p class="text-xs text-gray-500">&copy; 2026 Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+        const SUPABASE_URL = "https://nhrtqzwxrhvldmtwdmir.supabase.co"
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ocnRxend4cmh2bGRtdHdkbWlyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxNjUyNzYsImV4cCI6MjA5NTc0MTI3Nn0.KEctPSX1qxX6jMZEWC1Fl0WRNqPp_YMKAnJ2jEz3PzE"
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+        const emojiMap = {
+            guitare: "🎸", musique: "🎵", robot: "🦾", code: "💻", 
+            lecture: "📚", manga: "🎨", anime: "🎬", sport: "⚽"
+        };
+
+        function getEmoji(title) {
+            const lowerTitle = title.toLowerCase();
+            for (const key in emojiMap) {
+                if (lowerTitle.includes(key)) return emojiMap[key];
+            }
+            return "✨";
+        }
+
+        async function fetchSkillsAndSoftwares() {
+            // 1. Hard Skills (Génération avec structure prête pour l'animation)
+            const skillsContainer = document.getElementById('skills-container');
+            try {
+                const { data: skills, error: errSkills } = await supabase
+                    .from('Skills')
+                    .select('Name, Level')
+                    .order('Level', { ascending: false });
+
+                if (errSkills) throw errSkills;
+
+                if (skillsContainer) {
+                    skillsContainer.innerHTML = '';
+                    skills.forEach(skill => {
+                        let label = "Intermédiaire";
+                        if (skill.Level >= 90) label = "Expert";
+                        else if (skill.Level >= 75) label = "Avancé";
+
+                        skillsContainer.innerHTML += `
+                            <div class="interactive-element">
+                                <div class="flex justify-between mb-1.5">
+                                    <span class="text-sm font-semibold text-gray-800">${skill.Name}</span>
+                                    <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">${label} (${skill.Level}%)</span>
+                                </div>
+                                <div class="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
+                                    <div class="skill-progress bg-indigo-600 h-2 rounded-full transition-all duration-1000 ease-out" data-level="${skill.Level}" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // Déclenchement du remplissage fluide des barres après génération
+                    setTimeout(() => {
+                        document.querySelectorAll('.skill-progress').forEach(bar => {
+                            bar.style.width = `${bar.getAttribute('data-level')}%`;
+                        });
+                        document.querySelectorAll('#skills-container .interactive-element').forEach(el => el.classList.add('visible'));
+                    }, 100);
+                }
+            } catch (e) {
+                console.error(e.message);
+                if (skillsContainer) skillsContainer.innerHTML = '<p class="text-red-500 text-xs">Failed to load technical skills.</p>';
+            }
+
+            // 2. Soft Skills (Entrée séquentielle)
+            const softskillsContainer = document.getElementById('softskills-container');
+            try {
+                const { data: softSkills, error: errSoft } = await supabase
+                    .from('SoftSkills')
+                    .select('Name')
+                    .order('Name', { ascending: true });
+
+                if (errSoft) throw errSoft;
+
+                if (softskillsContainer) {
+                    softskillsContainer.innerHTML = '';
+                    if(softSkills.length === 0) {
+                        softskillsContainer.innerHTML = '<p class="text-gray-500 text-sm">Aucun soft skill trouvé.</p>';
+                    } else {
+                        softSkills.forEach((soft, index) => {
+                            const span = document.createElement('span');
+                            span.className = "interactive-element bg-white text-gray-800 text-sm font-medium px-4 py-2 rounded-xl border border-gray-100 shadow-sm interactive-badge";
+                            span.style.transitionDelay = `${index * 40}ms`;
+                            span.textContent = soft.Name;
+                            softskillsContainer.appendChild(span);
+                            
+                            setTimeout(() => span.classList.add('visible'), 50);
+                        });
+                    }
+                }
+            } catch (e) {
+                console.error(e.message);
+                if (softskillsContainer) softskillsContainer.innerHTML = '<p class="text-red-500 text-xs">Failed to load soft skills.</p>';
+            }
+
+            // 3. Logiciels & Outils Catégorisés (Entrée cinématique par bloc)
+            const categoriesContainer = document.getElementById('categories-container');
+            try {
+                const { data: softwares, error: errSoftwares } = await supabase
+                    .from('Softwares')
+                    .select('Name, Category')
+                    .order('Name', { ascending: true });
+
+                if (errSoftwares) throw errSoftwares;
+
+                if (categoriesContainer) {
+                    categoriesContainer.innerHTML = '';
+
+                    if (!softwares || softwares.length === 0) {
+                        categoriesContainer.innerHTML = '<p class="text-gray-500 text-sm col-span-full">Aucun logiciel trouvé.</p>';
+                    } else {
+                        const grouped = softwares.reduce((acc, software) => {
+                            const cat = software.Category || "Autres Outils";
+                            if (!acc[cat]) acc[cat] = [];
+                            acc[cat].push(software.Name);
+                            return acc;
+                        }, {});
+
+                        Object.entries(grouped).forEach(([categoryName, softwareList], index) => {
+                            const pillsHTML = softwareList.map(name => `
+                                <div class="bg-white px-3 py-2 rounded-xl border border-gray-100 shadow-sm flex items-center justify-center text-center interactive-badge">
+                                    <span class="text-sm font-medium text-gray-700 whitespace-nowrap">${name}</span>
+                                </div>
+                            `).join('');
+
+                            const wrapper = document.createElement('div');
+                            wrapper.className = "interactive-element category-card border border-gray-100 rounded-2xl p-6 bg-gray-50/50 flex flex-col justify-between";
+                            wrapper.style.transitionDelay = `${index * 80}ms`;
+                            wrapper.innerHTML = `
+                                <div>
+                                    <h3 class="text-xs font-bold text-indigo-600 uppercase tracking-wider mb-4 flex justify-between items-center bg-indigo-50/60 px-3 py-2 rounded-xl">
+                                        <span>${categoryName}</span>
+                                        <span class="bg-indigo-600 text-white text-[10px] px-2 py-0.5 rounded-full font-bold">${softwareList.length}</span>
+                                    </h3>
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2A gap-2.5">
+                                        ${pillsHTML}
+                                    </div>
+                                </div>
+                            `;
+                            categoriesContainer.appendChild(wrapper);
+                            setTimeout(() => wrapper.classList.add('visible'), 60);
+                        });
+                    }
+                }
+            } catch (e) {
+                console.error(e.message);
+                if (categoriesContainer) categoriesContainer.innerHTML = '<p class="text-red-500 text-xs col-span-full">Failed to load softwares.</p>';
+            }
+
+            // 4. Activités & Intérêts
+            const hobbiesContainer = document.getElementById('hobbies-container');
+            try {
+                const { data: hobbies, error: errHobbies } = await supabase
+                    .from('Hobbies')
+                    .select('Title, Description')
+                    .order('Title', { ascending: true });
+
+                if (errHobbies) throw errHobbies;
+
+                if (hobbiesContainer) {
+                    hobbiesContainer.innerHTML = '';
+                    if (hobbies.length === 0) {
+                        hobbiesContainer.innerHTML = '<p class="text-gray-500 text-sm col-span-full text-center">Aucun intérêt trouvé.</p>';
+                    } else {
+                        hobbies.forEach((hobby, index) => {
+                            const emoji = getEmoji(hobby.Title);
+                            const card = document.createElement('div');
+                            card.className = "interactive-element p-5 bg-gray-50 border border-gray-100 rounded-2xl text-center shadow-sm category-card";
+                            card.style.transitionDelay = `${index * 60}ms`;
+                            card.innerHTML = `
+                                <span class="text-2xl mb-2 block transform transition-transform duration-300 hover:scale-120">${emoji}</span>
+                                <h4 class="font-bold text-gray-900 text-sm tracking-tight">${hobby.Title}</h4>
+                                <p class="text-xs text-gray-500 mt-1.5 leading-relaxed">${hobby.Description || ''}</p>
+                            `;
+                            hobbiesContainer.appendChild(card);
+                            setTimeout(() => card.classList.add('visible'), 50);
+                        });
+                    }
+                }
+            } catch (e) {
+                console.error(e.message);
+                if (hobbiesContainer) hobbiesContainer.innerHTML = '<p class="text-red-500 text-xs col-span-full text-center">Failed to load hobbies.</p>';
+            }
+        }
+
+        // Configuration de l'Observer de défilement (Scroll Reveal)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Lancement au chargement complet du DOM
+        window.addEventListener('DOMContentLoaded', () => {
+            fetchSkillsAndSoftwares();
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        // Gestion du menu mobile responsive
+        const btn = document.querySelector('.mobile-menu-button');
+        const menu = document.querySelector('.mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+        // Effet Navbar adaptatif au défilement
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 40) {
+                nav.classList.add('bg-white/90', 'shadow-md', 'py-2');
+                nav.classList.remove('py-4', 'bg-white/70');
+            } else {
+                nav.classList.add('py-4', 'bg-white/70');
+                nav.classList.remove('bg-white/90', 'shadow-md', 'py-2');
+            }
+        });
+    </script>
+</body>
+</html>

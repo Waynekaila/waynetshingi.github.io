@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Wayne TSHINGI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        /* --- ANIMATION SCROLL REVEAL CINÉMATIQUE --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            filter: blur(8px);
+            transition: opacity 0.8s cubic-bezier(0.215, 0.610, 0.355, 1),
+                        transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1),
+                        filter 0.8s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
+        }
+
+        /* Entrée séquentielle pour les éléments enfants */
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active .stagger-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        /* Personnalisation de la barre de défilement */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="gradient-bg overflow-x-hidden text-gray-800">
+
+    <!-- Barre de navigation -->
+    <nav class="fixed w-full z-50 bg-white/70 shadow-sm border-b border-gray-100 transition-all duration-300 py-4" id="main-nav">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center h-12">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold tracking-tight text-gray-900 hover:text-indigo-600 transition-colors duration-300">
+                        WAYNE TSHINGI
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-300">Accueil</a>
+                    <a href="aboutme.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-300">Qui suis-je ?</a>
+                    <a href="project_page.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-300">Projets</a>
+                    <a href="skills.html" class="text-gray-600 hover:text-indigo-600 font-medium transition-colors duration-300">Compétences</a>
+                    <a href="contact.html" class="text-indigo-600 font-semibold border-b-2 border-indigo-500 pb-1">Contact</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button class="mobile-menu-button focus:outline-none text-gray-700 hover:text-indigo-600 transition-colors duration-300">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Menu mobile -->
+    <div class="mobile-menu hidden md:hidden bg-white/95 backdrop-blur-md shadow-lg pt-24 pb-6 fixed w-full z-40 border-b border-gray-100">
+        <div class="px-6 space-y-3">
+            <a href="index.html" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Accueil</a>
+            <a href="aboutme.html" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">À propos</a>
+            <a href="project_page.html" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Projets</a>
+            <a href="skills.html" class="block px-4 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-gray-50">Compétences</a>
+            <a href="contact.html" class="block px-4 py-2 rounded-lg text-base font-medium bg-indigo-50 text-indigo-600">Contact</a>
+        </div>
+    </div>
+
+    <!-- Section Contact -->
+    <section class="pt-36 pb-20 px-6 min-h-[calc(100vh-80px)]">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- En-tête -->
+            <div class="text-center mb-12 reveal">
+                <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mb-4">Me Contacter</h1>
+                <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
+                    Un projet en tête, une opportunité de collaboration ou simplement une question ? N'hésitez pas à m'envoyer un message !
+                </p>
+            </div>
+
+            <!-- Formulaire -->
+            <div class="max-w-md mx-auto bg-white rounded-2xl border border-gray-100 shadow-md overflow-hidden p-8 reveal" style="transition-delay: 150ms;">
+                <form id="contactForm" class="space-y-5">
+                    <div class="stagger-item" style="transition-delay: 200ms;">
+                        <label for="name" class="block text-sm font-semibold text-gray-700 mb-1.5">Nom complet</label>
+                        <input type="text" id="name" name="name" placeholder="Votre nom" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-300" required>
+                    </div>
+
+                    <div class="stagger-item" style="transition-delay: 250ms;">
+                        <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Adresse email</label>
+                        <input type="email" id="email" name="email" placeholder="adresse@exemple.com" class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-300" required>
+                    </div>
+
+                    <div class="stagger-item" style="transition-delay: 300ms;">
+                        <label for="message" class="block text-sm font-semibold text-gray-700 mb-1.5">Message</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Votre message..." class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-300" required></textarea>
+                    </div>
+
+                    <button type="submit" class="stagger-item w-full py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-600/10 active:scale-[0.98] transition-all duration-300" style="transition-delay: 350ms;">
+                        Envoyer le message
+                    </button>
+                </form>
+            </div>
+
+            <!-- Coordonnées Directes -->
+            <div class="mt-16 text-center reveal" style="transition-delay: 300ms;">
+                <h2 class="text-xl font-bold text-gray-900 mb-4">Informations de contact</h2>
+                <p class="text-gray-600 text-sm md:text-base">Email : <a href="mailto:waynekaila1@gmail.com" class="text-indigo-600 font-medium hover:underline">waynekaila1@gmail.com</a></p>
+                </div>
+
+            <!-- Liens de réseaux sociaux secondaires -->
+            
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer class="bg-gray-950 text-white py-12 px-6 border-t border-gray-900">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="text-lg font-bold tracking-tight">WAYNE TSHINGI</p>
+                <p class="text-sm text-gray-400">Étudiant en Génie Mécanique</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="https://www.instagram.com/_the_shadow96/" class="text-gray-400 hover:text-white transition-colors duration-200" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a href="https://www.linkedin.com/in/wayne-tshingi-a0157a280" class="text-gray-400 hover:text-white transition-colors duration-200" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/Waynekaila" class="text-gray-400 hover:text-white transition-colors duration-200" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+            <p class="text-xs text-gray-500">&copy; 2026 Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <script>
+        // Gestionnaire d'intersection pour le Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        // Gestion du menu mobile responsive
+        const btn = document.querySelector('.mobile-menu-button');
+        const menu = document.querySelector('.mobile-menu');
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+
+        // Effet Navbar adaptatif au défilement
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('main-nav');
+            if (window.scrollY > 40) {
+                nav.classList.add('bg-white/90', 'shadow-md', 'py-2');
+                nav.classList.remove('py-4', 'bg-white/70');
+            } else {
+                nav.classList.add('py-4', 'bg-white/70');
+                nav.classList.remove('bg-white/90', 'shadow-md', 'py-2');
+            }
+        });
+
+        // Gestion de la soumission du formulaire
+        const contactForm = document.getElementById('contactForm');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Sortie console de démonstration
+            console.log('Formulaire soumis :', { name, email, message });
+
+            // Alerte de confirmation traduite
+            alert('Merci pour votre message, ' + name + ' ! Je reviendrai vers vous dans les plus brefs délais.');
+
+            // Réinitialisation du formulaire
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
